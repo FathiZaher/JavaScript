@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fathi Zaher | Portfolio</title>
+
+    <style>
+        /* ---------- Global Styles ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Arial", sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        section {
+            padding: 100px 10%;
+        }
+
+        h1, h2 {
+            color: #2d3748;
+        }
+
+        /* ---------- Navigation ---------- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #2b6cb0;
+            color: white;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 5px 15px;
+        }
+
+        nav a:hover {
+            background-color: #3182ce;
+            border-radius: 5px;
+        }
+
+        /* ---------- Home Section ---------- */
+        #home {
+            background: linear-gradient(145deg, #43c6ac, #191654);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+        }
+
+        #home p {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ---------- About Section ---------- */
+        #about {
+            background: white;
+            text-align: center;
+        }
+
+        #about p {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* ---------- Portfolio Section ---------- */
+        #portfolio {
+            background: #edf2f7;
+            text-align: center;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .portfolio-item img:hover {
+            transform: scale(1.03);
+        }
+
+        /* ---------- Lightbox Styles ---------- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .lightbox .close,
+        .lightbox .prev,
+        .lightbox .next {
+            position: absolute;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .lightbox .close {
+            top: 20px;
+            right: 40px;
+        }
+
+        .lightbox .prev {
+            left: 40px;
+        }
+
+        .lightbox .next {
+            right: 40px;
+        }
+
+        /* ---------- Skills Section ---------- */
+        #skills {
+            background: white;
+        }
+
+        .skills-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .skill-item {
+            background: #38b2ac;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 200px;
+            text-align: center;
+        }
+
+        /* ---------- Contact Section ---------- */
+        #contact {
+            background: #e2e8f0;
+            text-align: center;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        textarea {
+            resize: none;
+            height: 150px;
+        }
+
+        button {
+            background-color: #3182ce;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2b6cb0;
+        }
+
+        /* ---------- Footer ---------- */
+        footer {
+            background: #2b6cb0;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* ---------- Offset for fixed nav ---------- */
+        .offset {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><strong>Fathi Zaher</strong></li>
+            <li>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="offset">
+        <div>
+            <h1>Hello, I'm Fathi Zaher</h1>
+            <p>Welcome to my portfolio website! I'm a passionate web developer focusing on creating innovative and user-friendly web experiences. Explore my projects and skills!</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="offset">
+        <h2>About Me</h2>
+        <p>
+            I am a web developer with a strong interest in creating functional and beautiful websites. With experience in HTML, CSS, JavaScript, and more, I enjoy solving complex problems and bringing ideas to life. I’m constantly learning and exploring new web technologies to improve my craft.
+        </p>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="offset">
+        <h2>Portfolio</h2>
+        <p>Here are some of the projects I’ve worked on:</p>
+
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1593642532906-fffae4b6e0e6" alt="Project 1">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1519681393771-fd799b029fb4" alt="Project 2">
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1596891348159-8a4b4ff54513" alt="Project 3">
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <span class="close" id="closeBtn">&times;</span>
+        <span class="prev" id="prevBtn">&#10094;</span>
+        <img id="lightboxImg" src="">
+        <span class="next" id="nextBtn">&#10095;</span>
+    </div>
+
+    <!-- Skills Section -->
+    <section id="skills" class="offset">
+        <h2>My Skills</h2>
+        <div class="skills-list">
+            <div class="skill-item">HTML</div>
+            <div class="skill-item">CSS</div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="offset">
+        <h2>Contact Me</h2>
+        <p>Feel free to get in touch with me using the form below:</p>
+
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message"></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Fathi Zaher. All rights reserved.</p>
+    </footer>
+
+    <!-- Lightbox Script -->
+    <script>
+        const images = document.querySelectorAll(".portfolio-item img");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightboxImg");
+        const closeBtn = document.getElementById("closeBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const prevBtn = document.getElementById("prevBtn");
+
+        let currentIndex = 0;
+
+        images.forEach((img, index) => {
+            img.addEventListener("click", () => {
+                currentIndex = index;
+                showImage();
+                lightbox.style.display = "flex";
+            });
+        });
+
+        function showImage() {
+            lightboxImg.src = images[currentIndex].src;
+        }
+
+        nextBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage();
+        });
+
+        prevBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage();
+        });
+
+        closeBtn.addEventListener("click", () => {
+            lightbox.style.display = "none";
+        });
+
+        window.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+            }
+        });
+
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") lightbox.style.display = "none";
+        });
+    </script>
+
+</body>
+</html>
